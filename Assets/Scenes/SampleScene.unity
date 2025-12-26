@@ -445,6 +445,7 @@ MonoBehaviour:
   fingerLength: 3
   fingerSpeed: 5
   pullStrength: 3
+  palmVelocityDampening: 0.8
 --- !u!1 &1749234844
 GameObject:
   m_ObjectHideFlags: 0
