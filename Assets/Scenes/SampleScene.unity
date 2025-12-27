@@ -371,7 +371,7 @@ Transform:
   m_GameObject: {fileID: 1492794936}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.69, y: 2.31, z: 0}
+  m_LocalPosition: {x: -1.4, y: 2.31, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -444,8 +444,9 @@ MonoBehaviour:
   palmRb: {fileID: 1749234848}
   fingerLength: 3
   fingerSpeed: 5
-  pullStrength: 3
-  palmVelocityDampening: 0.8
+  pullSoftness: 6
+  maxPullStrength: 8
+  palmVelocityDampening: 0.946
 --- !u!1 &1749234844
 GameObject:
   m_ObjectHideFlags: 0
