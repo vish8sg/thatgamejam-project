@@ -9,7 +9,7 @@ public class Tip : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.right * 5f);
+            GetComponent<Rigidbody2D>().AddForce(Vector2.right * 100f);
         }
     }
 }
