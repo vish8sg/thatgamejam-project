@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 1334521426}
   - component: {fileID: 1334521428}
   - component: {fileID: 1334521429}
+  - component: {fileID: 1334521430}
   m_Layer: 0
   m_Name: Capsule (2)
   m_TagString: Untagged
@@ -344,6 +345,7 @@ MonoBehaviour:
   springConstant: 200
   damperConstant: 25
   maxPullForce: 2000
+  palmRb: {fileID: 1516478722}
 --- !u!232 &1334521428
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -399,6 +401,26 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!257 &1334521430
+TargetJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334521421}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 3
+  m_Anchor: {x: 0, y: 0}
+  m_Target: {x: 0, y: 0}
+  m_AutoConfigureTarget: 0
+  m_MaxForce: 10000
+  m_DampingRatio: 1
+  m_Frequency: 5
 --- !u!1 &1409133537
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,8 +545,8 @@ Transform:
   m_GameObject: {fileID: 1409133537}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1982, y: -3.95, z: 0}
-  m_LocalScale: {x: 18.5564, y: 1, z: 1}
+  m_LocalPosition: {x: 13.939, y: -3.95, z: 0}
+  m_LocalScale: {x: 104.39126, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
