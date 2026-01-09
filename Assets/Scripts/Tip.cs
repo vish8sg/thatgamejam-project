@@ -9,6 +9,7 @@ public class Tip : MonoBehaviour
     [Tooltip("Increase to prevent un-anchored overshooting")][SerializeField] float damperConstant = 25f;
     [Tooltip("max pull force that can be exerted on finger rigidbody")] [SerializeField] float maxPullForce = 2000f;
 
+
     [SerializeField] Rigidbody2D palmRb;
 
     Rigidbody2D rb;
@@ -38,13 +39,16 @@ public class Tip : MonoBehaviour
             isAnchored = true;
             tJ.enabled = true;
             tJ.target = rb.position;
+            damperConstant *= 2;
         }
         else if (Input.GetMouseButtonUp(0))
         {
             isAnchored = false;
             tJ.enabled = false;
+            damperConstant /= 2;
         }
-        
+ 
+
     }
 
     void FixedUpdate()
@@ -53,6 +57,7 @@ public class Tip : MonoBehaviour
         Vector2 mouseVelocity = (mousePosition - prevMousePosition) / Time.fixedDeltaTime;
         prevMousePosition = mousePosition;
 
+        //calculate PD spring force to apply on finger
         Vector2 position = rb.position;
         Vector2 velocity = rb.velocity;
 
@@ -63,8 +68,8 @@ public class Tip : MonoBehaviour
         force = Vector2.ClampMagnitude(force, maxPullForce);
 
         rb.AddForce(force);
-        palmRb.AddForce(-force);
-        
+        Vector2 palmForce = (isAnchored) ? tJ.reactionForce : -force;
+        palmRb.AddForce(palmForce);
     }
 
     Vector2 GetMouseWorldPosition()
@@ -73,4 +78,10 @@ public class Tip : MonoBehaviour
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
         return new Vector2(mouseWorldPosition.x, mouseWorldPosition.y);
     }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawLine(Vector2.zero, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+    //    Gizmos.DrawLine(transform.position, (Vector3)((Vector2) transform.position + superForce));
+    //}
 }
