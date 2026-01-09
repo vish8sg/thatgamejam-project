@@ -402,7 +402,7 @@ TargetJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_Target: {x: 0, y: 0}
   m_AutoConfigureTarget: 0
-  m_MaxForce: 10000
+  m_MaxForce: 50000
   m_DampingRatio: 1
   m_Frequency: 5
 --- !u!114 &1334521431
