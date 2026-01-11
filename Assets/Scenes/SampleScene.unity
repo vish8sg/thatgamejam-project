@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 1492794937}
   - component: {fileID: 1492794938}
   - component: {fileID: 1492794939}
+  - component: {fileID: 1492794940}
   m_Layer: 0
   m_Name: FingerTip_Index
   m_TagString: Untagged
@@ -438,15 +439,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 1492794936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d6c47029f09f3c4a864129f657b9830, type: 3}
+  m_Script: {fileID: 11500000, guid: 37a2455a20c2535478127686f2475330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   palmRb: {fileID: 1749234848}
-  fingerLength: 3
-  fingerSpeed: 5
-  pullSoftness: 6
-  maxPullStrength: 8
-  palmVelocityDampening: 0.946
+  maxDistance: 2
+  forceMultiplier: 10
+  dragWhenIdle: 0.95
+--- !u!50 &1492794940
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492794936}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1749234844
 GameObject:
   m_ObjectHideFlags: 0

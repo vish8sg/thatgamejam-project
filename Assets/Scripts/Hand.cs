@@ -35,7 +35,8 @@ public class Hand : MonoBehaviour
         Vector2 force = springConstant * positionDifference + damperConstant * velocityDifference;
         force = Vector2.ClampMagnitude(force, maxPullForce);
 
-        AddForceToFinger(force, 0);
+        AddForceToFinger(mouseDelta * 100, 0);
+        if (mouseDelta == Vector2.zero) { fingerTips[0].velocity *= 0.95f; }
 
         Debug.Log(mousePosition);
         Debug.Log(Vector2.ClampMagnitude(mousePosition, fingerLength));
