@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Tip : MonoBehaviour
@@ -21,6 +22,9 @@ public class Tip : MonoBehaviour
     Vector2 prevMousePosition = Vector2.zero;
     bool isAnchored = false;
 
+    Vector2 anchoredMousePosition;
+    Vector2 anchoredInitialPalmPosition;
+
 
     private void Awake()
     {
@@ -40,12 +44,16 @@ public class Tip : MonoBehaviour
             tJ.enabled = true;
             tJ.target = rb.position;
             damperConstant *= 2;
+            anchoredMousePosition = prevMousePosition;
+            anchoredInitialPalmPosition = palmRb.position;
         }
         else if (Input.GetMouseButtonUp(0))
         {
             isAnchored = false;
             tJ.enabled = false;
             damperConstant /= 2;
+            anchoredMousePosition = Vector2.zero;
+            anchoredInitialPalmPosition = Vector2.zero;
         }
  
 
@@ -64,13 +72,35 @@ public class Tip : MonoBehaviour
         Vector2 positionDifference = mousePosition - position;
         Vector2 velocityDifference = mouseVelocity - velocity;
 
-        Vector2 force = springConstant * positionDifference + damperConstant * velocityDifference;
-        force = Vector2.ClampMagnitude(force, maxPullForce);
+        
 
-        rb.AddForce(force);
-        Vector2 palmForce = (isAnchored) ? tJ.reactionForce : -force;
+        Vector2 pForce = Vector2.zero;
+        if (isAnchored)
+        {
+            Vector2 mouseDeltaFromAnchor = mousePosition - anchoredMousePosition; // target displacement for palm when anchored
+            Debug.Log(mouseDeltaFromAnchor);
+            Debug.Log(mousePosition - anchoredMousePosition);   
+            Vector2 targetPalmPosition = anchoredInitialPalmPosition + mouseDeltaFromAnchor;
+            Vector2 palmPositionDifference = targetPalmPosition - palmRb.position;
+            Vector2 palmVelocityDifference = mouseVelocity - palmRb.velocity;
+            pForce = springConstant * palmPositionDifference + damperConstant * palmVelocityDifference;
+        }
+
+        Vector2 force = springConstant * positionDifference + damperConstant * velocityDifference;
+       
+
+        force = Vector2.ClampMagnitude(force, maxPullForce);
+        pForce = Vector2.ClampMagnitude(pForce, maxPullForce);
+
+        if (!isAnchored) { rb.AddForce(force); }
+        //rb.AddForce(force);
+        Vector2 palmForce = (isAnchored) ? pForce : -dJ.reactionForce;
+        if (palmForce.sqrMagnitude < 0.01) {return; }
         palmRb.AddForce(palmForce);
+        Debug.Log(pForce);
+        Debug.Log(-pForce);
     }
+    
 
     Vector2 GetMouseWorldPosition()
     {
